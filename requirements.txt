@@ -1,2 +1,7 @@
 asyncpg==0.30.0
-psycopg2==2.9.10
+psycopg2-binary==2.9.10
+dbt-postgres==1.9.0
+openai==1.68.2
+streamlit==1.44.0
+setuptools==78.1.0
+watchdog==6.0.0
