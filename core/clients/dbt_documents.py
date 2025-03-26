@@ -1,7 +1,8 @@
-import json
 import os
-from collections import defaultdict
+import json
 from typing import List, Dict
+from collections import defaultdict
+
 
 
 class DbtDocuments:
@@ -86,6 +87,8 @@ class DbtDocuments:
     def build_table_descriptions(self) -> List[Dict]:
         """
         Create a list of dicts for all table names with their descriptions.
+
+        :return: [ {"table_name": "", "table_description": ""}, ... ]
         """
         descriptions = []
         for node_id, node in self.manifest.get("nodes", {}).items():

@@ -1,4 +1,4 @@
-from core.clients.dbt_docs import DbtDocuments
+from core.clients.dbt_documents import DbtDocuments
 
 
 class DbtDocumentsDB(DbtDocuments):
