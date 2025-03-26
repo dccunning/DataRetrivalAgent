@@ -1,0 +1,332 @@
+[
+  {
+    "table_name": "dim_bank_trustpilot_reviews",
+    "table_description": "Information on bank Trustpilot reviews",
+    "columns": [
+      {
+        "name": "review_id",
+        "type": "integer",
+        "description": "Trustpilot review ID."
+      },
+      {
+        "name": "user_id",
+        "type": "integer",
+        "description": "Unique ID identifying the user across all data sources (PS. not every Trustpilot review has a user_id)."
+      },
+      {
+        "name": "createdtimestamp",
+        "type": "timestamp without time zone",
+        "description": "The moment the review was received by Trustpilot."
+      },
+      {
+        "name": "stars",
+        "type": "integer",
+        "description": "Rating from the review (ranging from 1 to 5)."
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "description": "Feedback text written by the reviewer."
+      },
+      {
+        "name": "source",
+        "type": "character varying(255)",
+        "description": "Source of the Trustpilot review."
+      },
+      {
+        "name": "is_review_verified",
+        "type": "boolean",
+        "description": "True if the review was verified by Trustpilot."
+      }
+    ]
+  },
+  {
+    "table_name": "dim_bank_onboarding_event",
+    "table_description": "Logs user onboarding events within the banking app",
+    "columns": [
+      {
+        "name": "event_id",
+        "type": "integer",
+        "description": "Unique identifier for the onboarding event."
+      },
+      {
+        "name": "user_id",
+        "type": "integer",
+        "description": "ID of the user involved in the onboarding event."
+      },
+      {
+        "name": "timestamp",
+        "type": "timestamp without time zone",
+        "description": "Timestamp when the onboarding event occurred."
+      },
+      {
+        "name": "button_type",
+        "type": "character varying(10)",
+        "description": "Type of button clicked during onboarding."
+      },
+      {
+        "name": "screen_name",
+        "type": "character varying(10)",
+        "description": "Screen where the event occurred."
+      }
+    ]
+  },
+  {
+    "table_name": "dim_bank_monetary_account",
+    "table_description": "Monetary account information for digital bank users.",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "description": "Unique ID for the monetary account."
+      },
+      {
+        "name": "user_id",
+        "type": "integer",
+        "description": "Owner of the monetary account."
+      },
+      {
+        "name": "created_on",
+        "type": "date",
+        "description": "Date the account was created."
+      },
+      {
+        "name": "currency",
+        "type": "character varying(10)",
+        "description": "Currency associated with the account."
+      },
+      {
+        "name": "status",
+        "type": "character varying(10)",
+        "description": "Status of the monetary account."
+      },
+      {
+        "name": "type",
+        "type": "character varying(10)",
+        "description": "Type of monetary account."
+      },
+      {
+        "name": "balance",
+        "type": "numeric(15,2)",
+        "description": "Current balance in the account."
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "description": "Description of the account."
+      },
+      {
+        "name": "iban_country",
+        "type": "character varying(2)",
+        "description": "IBAN country code associated with the account."
+      }
+    ]
+  },
+  {
+    "table_name": "dim_stocks_nyse",
+    "table_description": "Stock information for companies listed on the NYSE.",
+    "columns": [
+      {
+        "name": "symbol",
+        "type": "text",
+        "description": "Ticker symbol of the stock."
+      },
+      {
+        "name": "company_name",
+        "type": "text",
+        "description": "Name of the company."
+      },
+      {
+        "name": "sector",
+        "type": "text",
+        "description": "Sector the company operates in."
+      },
+      {
+        "name": "industry",
+        "type": "text",
+        "description": "Industry classification."
+      },
+      {
+        "name": "beta",
+        "type": "numeric",
+        "description": "Volatility measure of the stock."
+      },
+      {
+        "name": "price",
+        "type": "numeric",
+        "description": "Current stock price."
+      },
+      {
+        "name": "last_annual_dividend",
+        "type": "numeric",
+        "description": "Most recent annual dividend value."
+      },
+      {
+        "name": "volume",
+        "type": "bigint",
+        "description": "Daily trading volume."
+      },
+      {
+        "name": "country",
+        "type": "text",
+        "description": "Country where the company is based."
+      },
+      {
+        "name": "is_etf",
+        "type": "boolean",
+        "description": "True if this is an ETF."
+      },
+      {
+        "name": "is_fund",
+        "type": "boolean",
+        "description": "True if this is a fund."
+      },
+      {
+        "name": "is_actively_trading",
+        "type": "boolean",
+        "description": "True if the stock is currently actively traded."
+      }
+    ]
+  },
+  {
+    "table_name": "dim_bank_registration_source",
+    "table_description": "Source and metadata about where users registered from.",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "description": "Unique identifier for the registration record."
+      },
+      {
+        "name": "user_id",
+        "type": "integer",
+        "description": "User who registered."
+      },
+      {
+        "name": "first_login_timestamp",
+        "type": "timestamp without time zone",
+        "description": "Timestamp of first login."
+      },
+      {
+        "name": "source",
+        "type": "character varying(255)",
+        "description": "Source through which the user registered."
+      },
+      {
+        "name": "app_os",
+        "type": "character varying(255)",
+        "description": "Operating system of the user's app."
+      }
+    ]
+  },
+  {
+    "table_name": "dim_bank_user",
+    "table_description": "User dimension table including age and status details.",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "description": "Unique identifier for the user."
+      },
+      {
+        "name": "type",
+        "type": "character varying(50)",
+        "description": "Type or category of the user."
+      },
+      {
+        "name": "age",
+        "type": "numeric",
+        "description": "User age calculated from date_of_birth and the current date."
+      },
+      {
+        "name": "status",
+        "type": "character varying(50)",
+        "description": "Current status of the user account."
+      },
+      {
+        "name": "created_date",
+        "type": "timestamp without time zone",
+        "description": "Timestamp when the user was created."
+      },
+      {
+        "name": "updated_date",
+        "type": "timestamp without time zone",
+        "description": "Timestamp when the user record was last updated."
+      },
+      {
+        "name": "country",
+        "type": "character varying(100)",
+        "description": "Country of the user."
+      }
+    ]
+  },
+  {
+    "table_name": "dim_bank_invoice_item",
+    "table_description": "Contains line items associated with invoices.",
+    "columns": [
+      {
+        "name": "id",
+        "type": "integer",
+        "description": "Unique identifier for the invoice item."
+      },
+      {
+        "name": "invoice_id",
+        "type": "integer",
+        "description": "Identifier of the invoice this item belongs to."
+      },
+      {
+        "name": "user_id",
+        "type": "integer",
+        "description": "User associated with this invoice item."
+      },
+      {
+        "name": "date",
+        "type": "date",
+        "description": "Date of the invoice item."
+      },
+      {
+        "name": "billing_product",
+        "type": "character varying(255)",
+        "description": "Product associated with the billing.",
+        "enums": [
+          "Extra Card",
+          "Ideal Transfers",
+          "Easy Green Subscription",
+          "Extra Monetary Account",
+          "Easy Money Subscription",
+          "Metal Card"
+        ]
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "description": "Description of the item."
+      },
+      {
+        "name": "type",
+        "type": "character varying(10)",
+        "description": "Type of billing item.",
+        "enums": [
+          "discount",
+          "refund",
+          "price"
+        ]
+      },
+      {
+        "name": "amount",
+        "type": "numeric(15,2)",
+        "description": "Monetary amount for this item."
+      },
+      {
+        "name": "currency",
+        "type": "character varying(10)",
+        "description": "Currency used."
+      },
+      {
+        "name": "billing_type",
+        "type": "character varying(255)",
+        "description": "Billing type (e.g., recurring, one-time)."
+      }
+    ]
+  }
+]

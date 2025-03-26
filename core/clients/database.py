@@ -8,22 +8,21 @@ import psycopg2
 from typing import List
 from decimal import Decimal
 from datetime import datetime, date, time
-from core.utils.connected_network import on_home_network
 
 
 class Database:
     def __init__(
             self,
             database: str = os.getenv("DATABASE_NAME"),
-            user: str = os.getenv("DATABASE_EXTERNAL_USER"),
-            password: str = os.getenv("DATABASE_EXTERNAL_USER_PASSWORD"),
-            host: str = os.getenv("DATABASE_HOME_HOST"),
+            user: str = os.getenv("DATABASE_USER"),
+            password: str = os.getenv("DATABASE_PASSWORD"),
+            host: str = os.getenv("DATABASE_HOST"),
             port: str = os.getenv("DATABASE_PORT")
     ):
         self.database = database
         self.user = user
         self.password = password
-        self.host = host if on_home_network() else os.getenv("DATABASE_AWAY_HOST")
+        self.host = host
         self.port = port
 
     def __get_db_connection(self):
