@@ -12,6 +12,18 @@ search for evidence supporting your claims or to answer questions with quantitat
 4. React frontend (Vite + TypeScript, served as static files by Nginx on local/cloud server)
 5. Nginx for SSL and routing (Runs directly on the local/cloud server)
 
+### Functionalities
+1. Run AI generated queries on a given database with provided credentials
+2. Search the internet for data related to your question and as context to provide answer
+
+
+### TODO:
+1. Create new backend database for this tool: data_retrival_agent
+2. Create login/signup function and save credentials on backend db using bcrypt for prod
+3. Local environment has default login: admin/admin and saves creds locally
+4. Create cloud_mode.py file
+5. Create all clients for the tool
+
 
 ### Developer Setup Instructions
 #### Backend
