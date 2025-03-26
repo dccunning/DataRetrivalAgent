@@ -3,17 +3,17 @@ dbt:
   outputs:
     dev:
       type: postgres
-      host: 75.155.166.60 #192.168.1.67
-      user: dbt_user
-      password: N8r!vPx73@kdLaWz5#Ft
-      port: 5432
-      dbname: postgres
-      schema: dbt
+      host: "{{ env_var('DATABASE_HOME_HOST') }}"
+      user: "{{ env_var('DATABASE_USER') }}"
+      password: "{{ env_var('DATABASE_PASSWORD') }}"
+      port: "{{ env_var('DATABASE_PORT') | int }}"
+      dbname: "{{ env_var('DATABASE_NAME') }}"
+      schema: dbt_dev
     prod:
       type: postgres
-      host: 75.155.166.60
-      user: dbt_user
-      password: N8r!vPx73@kdLaWz5#Ft
-      port: 5432
-      dbname: postgres
+      host: "{{ env_var('DATABASE_AWAY_HOST') }}"
+      user: "{{ env_var('DATABASE_USER') }}"
+      password: "{{ env_var('DATABASE_PASSWORD') }}"
+      port: "{{ env_var('DATABASE_PORT') | int }}"
+      dbname: "{{ env_var('DATABASE_NAME') }}"
       schema: dbt
