@@ -5,7 +5,7 @@ from core.config import load_config, save_config
 from core.clients.database import Database  # Assumes you have this
 
 st.set_page_config(page_title="Data Retrieval Agent", layout="wide")
-st.title("🧠 Data Retrieval Agent")
+st.title("Data Retrieval Agent")
 
 # Load saved config
 config = load_config()
