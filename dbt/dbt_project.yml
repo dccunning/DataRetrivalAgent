@@ -1,0 +1,12 @@
+name: 'dbt_project'
+version: '1.0'
+profile: 'dbt'  # must match profile name in ~/.dbt/profiles.yml
+
+model-paths: ["models"]
+target-path: "target"
+clean-targets: ["target", "dbt_modules"]
+
+models:
+  dbt_project:
+    dim:
+      materialized: table
