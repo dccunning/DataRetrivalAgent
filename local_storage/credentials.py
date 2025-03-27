@@ -13,7 +13,7 @@ def load_credentials():
 
 
 def save_credentials(data):
-    """Save credentials to ~/.data-retrival-agent/config.json"""
+    """Save credentials to ~/.data-retrival-agent/credentials.json"""
     os.makedirs(os.path.dirname(CREDENTIALS_PATH), exist_ok=True)
     with open(CREDENTIALS_PATH, "w") as f:
         json.dump(data, f, indent=2)
