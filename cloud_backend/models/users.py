@@ -11,6 +11,7 @@ class User:
         password BYTEA NOT NULL,
         email TEXT UNIQUE,
         role TEXT NOT NULL DEFAULT 'user',
+        credentials_json BYTEA,
         created_at TIMESTAMPTZ DEFAULT NOW(),
         updated_at TIMESTAMPTZ DEFAULT NOW()
     );
@@ -20,5 +21,6 @@ class User:
     password: bytes
     email: Optional[str] = None
     role: str = "user"
+    credentials_json: Optional[bytes] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None

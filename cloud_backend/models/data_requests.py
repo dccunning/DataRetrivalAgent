@@ -9,7 +9,7 @@ class DataRequest:
     CREATE TABLE IF NOT EXISTS backend.data_requests (
         id SERIAL PRIMARY KEY,
         request_text TEXT NOT NULL,
-        status TEXT NOT NULL CHECK (status IN ('success', 'fail')),
+        status TEXT NOT NULL CHECK (status IN ('pending', 'success', 'fail')),
         response TEXT,
         created_at TIMESTAMPTZ DEFAULT NOW(),
         updated_at TIMESTAMPTZ DEFAULT NOW()
