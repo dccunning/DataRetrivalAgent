@@ -1,10 +1,10 @@
 import os
 import jwt
 import bcrypt
-from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
+from fastapi import APIRouter, HTTPException
 from datetime import datetime, timedelta, timezone
-from backend_api.clients.database import Database
+from core.clients.database import Database
 
 JWT_SECRET = os.getenv("JWT_SECRET", "dev-secret")
 router = APIRouter()
@@ -26,7 +26,7 @@ class LoginRequest(BaseModel):
     password: str
 
 
-@router.post("/login")
+@router.post("/")
 def login(data: LoginRequest):
     """Verify the email and password are valid login details and return the auth token."""
     query = "SELECT id, email, password FROM backend.users WHERE email = %s"

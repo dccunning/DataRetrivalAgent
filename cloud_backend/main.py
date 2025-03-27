@@ -1,16 +1,7 @@
 # API entrypoint (FastAPI)
-import os
-from fastapi import FastAPI, Header, HTTPException, APIRouter, Depends
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import login, signup, data_request_history
-
-API_KEY = os.getenv("API_KEY")
-
-
-def get_api_key(api_key: str = Header(...)):
-    """Dependency to check API key."""
-    if api_key != API_KEY:
-        raise HTTPException(status_code=403, detail="Invalid API Key")
+from routes import login, signup, credentials, dbt_metadata
 
 
 app = FastAPI()
@@ -23,11 +14,13 @@ app.add_middleware(
 )
 
 # === PUBLIC ROUTES (no auth required) ===
-app.include_router(login.router, prefix="/api", tags=["auth"])
-app.include_router(signup.router, prefix="/api", tags=["auth"])
+app.include_router(login.router, prefix="/login", tags=["auth"])
+app.include_router(signup.router, prefix="/signup", tags=["auth"])
+app.include_router(credentials.router, prefix="/credentials", tags=["credentials"])
+app.include_router(dbt_metadata.router, prefix="/dbt_metadata", tags=["metadata"])
 
 # === PROTECTED ROUTES (requires JWT auth) ===
-app.include_router(data_request_history.router, prefix="/api", tags=["chats"])
+# app.include_router(data_request_history.router, prefix="/data_request_history", tags=["requests"])
 
 
 @app.get("/")

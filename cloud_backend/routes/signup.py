@@ -1,7 +1,7 @@
 import bcrypt
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, EmailStr
-from backend_api.clients.database import Database
+from core.clients.database import Database
 
 router = APIRouter()
 db = Database()
@@ -12,7 +12,7 @@ class SignupRequest(BaseModel):
     email: EmailStr
 
 
-@router.post("/signup")
+@router.post("/")
 def signup(data: SignupRequest):
     """Create a new user with the given email and password."""
     # Check if user already exists
