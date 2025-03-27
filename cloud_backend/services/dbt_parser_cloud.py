@@ -1,7 +1,7 @@
-from core.clients.dbt_documents import DbtDocuments
+from core.services.dbt_parser import DbtParser
 
 
-class DbtDocumentsDB(DbtDocuments):
+class DbtParserCloud(DbtParser):
     def __init__(self, manifest: dict, catalog: dict, db, embed_func):
         super().__init__(manifest, catalog)
         self.db = db

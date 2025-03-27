@@ -4,8 +4,7 @@ from typing import List, Dict
 from collections import defaultdict
 
 
-
-class DbtDocuments:
+class DbtParser:
     def __init__(self, manifest: dict, catalog: dict):
         self.manifest = manifest
         self.catalog = catalog
