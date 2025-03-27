@@ -1,7 +1,5 @@
 __pycache__/
 **/.DS_Store
 .env
-dbt/logs/dbt.log
-dbt/.user.yml
-dbt/target/
+dbt/
 data_retrival_agent.egg-info

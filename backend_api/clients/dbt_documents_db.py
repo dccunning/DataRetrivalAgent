@@ -2,9 +2,9 @@ from core.clients.dbt_documents import DbtDocuments
 
 
 class DbtDocumentsDB(DbtDocuments):
-    def __init__(self, manifest: dict, catalog: dict, db_client, embed_func):
+    def __init__(self, manifest: dict, catalog: dict, db, embed_func):
         super().__init__(manifest, catalog)
-        self.db_client = db_client  # Your DB abstraction or raw connection
+        self.db = db
         self.embed_func = embed_func  # A function that turns text -> vector
 
     def save_outputs(self):
@@ -15,6 +15,7 @@ class DbtDocumentsDB(DbtDocuments):
         descriptions = self.build_table_descriptions()
 
         self.db_client.insert("table_summary", summary)
+        self.db.run_query("insert into ")
         self.db_client.insert("table_descriptions", descriptions)
 
     def save_vectors_to_store(self, user_id: int, db_name: str):
