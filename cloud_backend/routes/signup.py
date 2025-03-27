@@ -25,7 +25,7 @@ def signup(data: SignupRequest):
     hashed_pw = bcrypt.hashpw(data.password.encode("utf-8"), bcrypt.gensalt())
 
     insert_query = """
-        INSERT INTO backend.users (password, email, role)
+        INSERT INTO backend.user (password, email, role)
         VALUES (%s, %s, %s);
     """
     db.run_query(insert_query, (hashed_pw, data.email, "user"))

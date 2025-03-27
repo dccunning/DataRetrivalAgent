@@ -2,7 +2,7 @@ import os
 import jwt
 from jwt import PyJWTError
 from fastapi import Header, HTTPException
-from cloud_backend.models.users import User
+from cloud_backend.models.user import User
 
 JWT_SECRET = os.getenv("JWT_SECRET", "dev-secret")
 JWT_ALGORITHM = "HS256"

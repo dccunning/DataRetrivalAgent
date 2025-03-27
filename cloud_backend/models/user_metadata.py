@@ -7,7 +7,7 @@ from datetime import datetime
 class UserMetadata:
     __create_table__ = """
     CREATE TABLE IF NOT EXISTS backend.user_metadata (
-        user_id INT PRIMARY KEY REFERENCES backend.users(id),
+        user_id INT PRIMARY KEY REFERENCES backend.user(id),
         manifest_json BYTEA,
         catalog_json BYTEA,
         table_summary_json BYTEA,

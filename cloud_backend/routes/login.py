@@ -29,7 +29,7 @@ class LoginRequest(BaseModel):
 @router.post("/")
 def login(data: LoginRequest):
     """Verify the email and password are valid login details and return the auth token."""
-    query = "SELECT id, email, password FROM backend.users WHERE email = %s"
+    query = "SELECT id, email, password FROM backend.user WHERE email = %s"
     result = db.run_query(query, (data.email,))
 
     if not result:

@@ -1,7 +1,7 @@
 import json
 from pydantic import BaseModel
 from fastapi import APIRouter, Depends, HTTPException
-from cloud_backend.models.users import User
+from cloud_backend.models.user import User
 from core.clients.database import Database
 from cloud_backend.utils.auth import get_current_user
 from cloud_backend.utils.config import fernet
@@ -17,7 +17,7 @@ class CredentialsUpdateRequest(BaseModel):
 @router.get("/")
 def get_credentials(current_user: User = Depends(get_current_user)) -> dict:
     """Fetch and decrypt the credentials JSON blob."""
-    query = "SELECT credentials_json FROM backend.users WHERE id = %s"
+    query = "SELECT credentials_json FROM backend.user WHERE id = %s"
     result = db.run_query(query, (current_user.id,))
 
     if not result or not result[0]["credentials_json"]:
@@ -38,7 +38,7 @@ def save_credentials(data: CredentialsUpdateRequest, current_user: User = Depend
     serialized = json.dumps(data.credentials).encode("utf-8")
     encrypted = fernet.encrypt(serialized)
 
-    query = "UPDATE backend.users SET credentials_json = %s, updated_at = NOW() WHERE id = %s"
+    query = "UPDATE backend.user SET credentials_json = %s, updated_at = NOW() WHERE id = %s"
     db.run_query(query, (encrypted, current_user.id))
 
     return {"status": "✅ Credentials saved securely"}

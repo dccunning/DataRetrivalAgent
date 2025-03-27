@@ -14,12 +14,12 @@ app.add_middleware(
 )
 
 # === PUBLIC ROUTES (no auth required) ===
-app.include_router(login.router, prefix="/login", tags=["auth"])
-app.include_router(signup.router, prefix="/signup", tags=["auth"])
-app.include_router(credentials.router, prefix="/credentials", tags=["credentials"])
-app.include_router(dbt_metadata.router, prefix="/dbt_metadata", tags=["metadata"])
+app.include_router(login.router, prefix="/login", tags=["user", "auth"])
+app.include_router(signup.router, prefix="/signup", tags=["user", "auth"])
 
 # === PROTECTED ROUTES (requires JWT auth) ===
+app.include_router(credentials.router, prefix="/credentials", tags=["user", "credentials"])
+app.include_router(dbt_metadata.router, prefix="/dbt_metadata", tags=["user_metadata", "metadata"])
 # app.include_router(data_request_history.router, prefix="/data_request_history", tags=["requests"])
 
 

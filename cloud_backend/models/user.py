@@ -6,7 +6,7 @@ from datetime import datetime
 @dataclass
 class User:
     __create_table__ = """
-    CREATE TABLE IF NOT EXISTS backend.users (
+    CREATE TABLE IF NOT EXISTS backend.user (
         id SERIAL PRIMARY KEY,
         password BYTEA NOT NULL,
         email TEXT UNIQUE,

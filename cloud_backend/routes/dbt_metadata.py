@@ -1,7 +1,7 @@
 import json
 from pydantic import BaseModel
 from fastapi import APIRouter, Depends, HTTPException
-from cloud_backend.models.users import User
+from cloud_backend.models.user import User
 from core.clients.database import Database
 from cloud_backend.utils.auth import get_current_user
 from cloud_backend.utils.config import fernet
