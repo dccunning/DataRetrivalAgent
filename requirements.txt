@@ -5,3 +5,7 @@ openai==1.68.2
 streamlit==1.44.0
 setuptools==78.1.0
 watchdog==6.0.0
+fastapi==0.115.12
+bcrypt==4.3.0
+PyJWT==2.10.1
+python-dotenv==1.1.0
