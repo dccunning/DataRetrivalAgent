@@ -1,5 +1,5 @@
 __pycache__/
 **/.DS_Store
 .env
-dbt/
+dbt
 data_retrival_agent.egg-info
