@@ -1,10 +1,8 @@
-import os
-import json
 from typing import List, Dict
 from collections import defaultdict
 
 
-class DbtParser:
+class DbtMetadataParser:
     def __init__(self, manifest: dict, catalog: dict):
         self.manifest = manifest
         self.catalog = catalog
@@ -101,20 +99,3 @@ class DbtParser:
                 "table_description": model_description
             })
         return descriptions
-
-    def save_outputs(self):
-        """
-        Save the table summary and table description lists to the local package folder:
-        .data-retrival-agent/
-        """
-        output_dir = os.path.expanduser("~/.data-retrival-agent/table_meta_data/")
-        os.makedirs(output_dir, exist_ok=True)
-
-        summary = self.build_table_summary()
-        descriptions = self.build_table_descriptions()
-
-        with open(os.path.join(output_dir, "dbt_table_summary.json"), "w") as f:
-            json.dump(summary, f, indent=2)
-
-        with open(os.path.join(output_dir, "dbt_table_descriptions.json"), "w") as f:
-            json.dump(descriptions, f, indent=2)
