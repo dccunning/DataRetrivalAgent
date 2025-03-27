@@ -17,14 +17,6 @@ search for evidence supporting your claims or to answer questions with quantitat
 2. Search the internet for data related to your question and as context to provide answer
 
 
-### TODO:
-1. Create new backend database for this tool: data_retrival_agent
-2. Create login/signup function and save credentials on backend db using bcrypt for prod
-3. Local environment has default login: admin/admin and saves creds locally
-4. Create cloud_mode.py file
-5. Create all clients for the tool
-
-
 ### Developer Setup Instructions
 #### Backend
 

@@ -3,3 +3,4 @@ __pycache__/
 .env
 dbt
 data_retrival_agent.egg-info
+TODO.md
