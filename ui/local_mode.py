@@ -1,14 +1,22 @@
+# UI for local mode usage
 import streamlit as st
 import json
+import sys
 import os
-from core.config import load_config, save_config
-from core.clients.database import Database  # Assumes you have this
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from local_storage.credentials import load_credentials, save_credentials
+from core.clients.database import Database
+from local_storage.dbt_metadata import (
+    load_manifest, load_catalog,
+    save_manifest, save_catalog,
+    parse_and_save_metadata
+)
 
 st.set_page_config(page_title="Data Retrieval Agent", layout="wide")
 st.title("Data Retrieval Agent")
 
 # Load saved config
-config = load_config()
+config = load_credentials()
 
 # Initialize session state
 if "manifest_json" not in st.session_state:
@@ -34,7 +42,7 @@ with tab1:
         port = st.text_input("DB Port", value=str(config.get("db", {}).get("port", "5432")))
 
         if st.button("Save Config"):
-            save_config({
+            save_credentials({
                 "openai_api_key": openai_key,
                 "db": {
                     "host": host,
@@ -50,27 +58,36 @@ with tab1:
         uploaded_manifest = st.file_uploader("Upload manifest.json", type="json")
         uploaded_catalog = st.file_uploader("Upload catalog.json", type="json")
 
+        manifest_json = None
+        catalog_json = None
+
         if uploaded_manifest and uploaded_catalog:
-            st.session_state.manifest_json = json.load(uploaded_manifest)
-            st.session_state.catalog_json = json.load(uploaded_catalog)
-            st.success("✅ Files uploaded and stored in session.")
+            manifest_json = json.load(uploaded_manifest)
+            catalog_json = json.load(uploaded_catalog)
+            st.success("✅ Uploaded and saved to local storage.")
 
-        elif os.getenv("DRA_MANIFEST_PATH") and os.getenv("DRA_CATALOG_PATH"):
+        else:
+            # Try loading from ~/.data-retrival-agent/
             try:
-                with open(os.getenv("DRA_MANIFEST_PATH")) as f:
-                    st.session_state.manifest_json = json.load(f)
-                with open(os.getenv("DRA_CATALOG_PATH")) as f:
-                    st.session_state.catalog_json = json.load(f)
-                st.success("✅ Loaded DBT metadata from environment paths.")
+                manifest_json = load_manifest()
+                catalog_json = load_catalog()
+                if manifest_json and catalog_json:
+                    st.success("✅ Loaded metadata from local storage.")
+                else:
+                    st.info("Upload manifest.json and catalog.json to get started.")
             except Exception as e:
-                st.error(f"Failed to load metadata: {e}")
+                st.error(f"❌ Failed to load metadata: {e}")
 
-        # Display status
-        manifest_status = "✅ Provided" if st.session_state.manifest_json else "❌ Missing"
-        catalog_status = "✅ Provided" if st.session_state.catalog_json else "❌ Missing"
+        dbt_table_summary = None
+        dbt_table_descriptions = None
 
-        st.write(f"- manifest.json: {manifest_status}")
-        st.write(f"- catalog.json: {catalog_status}")
+        if manifest_json and catalog_json:
+            save_manifest(manifest_json)
+            save_catalog(catalog_json)
+            dbt_table_summary, dbt_table_descriptions = parse_and_save_metadata(manifest_json, catalog_json)
+
+        st.write(f"- manifest.json: {'✅ Provided' if manifest_json else '❌ Missing'}")
+        st.write(f"- catalog.json: {'✅ Provided' if catalog_json else '❌ Missing'}")
 
 # -------------------------
 # 💬 Query Runner Tab
